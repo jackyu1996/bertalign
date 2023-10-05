@@ -29,8 +29,8 @@ def align(src_file, tgt_file, src_lang, tgt_lang):
 def batch_align(src_dir, tgt_dir, src_lang, tgt_lang):
     from bertalign import Bertalign
 
-    all_src_files = list(Path(src_dir).glob("*.txt"))
-    all_tgt_files = list(Path(tgt_dir).glob("*.txt"))
+    all_src_files = sorted(list(Path(src_dir).glob("*.txt")))
+    all_tgt_files = sorted(list(Path(tgt_dir).glob("*.txt")))
 
     if len(all_src_files) != len(all_tgt_files):
         print("Wrong number of source and target files")
