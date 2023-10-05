@@ -18,7 +18,7 @@ Alignment between 25 languages: Catalan (ca), Chinese (zh), Czech (cs), Danish (
 
 ## Installation
 
-Please see [requirements.txt](./requirements.txt) for installation. 
+Please see [requirements.txt](./requirements.txt) for installation.
 
 ### You can also install Bertalign and run the examples directly in a [Google Colab notebook](https://colab.research.google.com/drive/123GhXwgwmQp1F5SVZ74_uIgyxo6hLRq0?usp=sharing).
 
@@ -125,110 +125,6 @@ aligner.print_sents()
     
     叶文洁看过他写的文章，文笔很好，其中有一种与这个粗放环境很不协调的纤细和敏感，令她很难忘。
     Ye remembered reading his articles, which were written in a beautiful style, sensitive and fine, ill suited to the rough-hewn environment.
-
-## Batch processing & evaluation
-
-The following example shows how to use Bertalign to align the Text+Berg corpus, and evaluate its performance with gold standard alignments. The evaluation script [eval.py](./bertalign/eval.py) is based on [Vecalign](https://github.com/thompsonb/vecalign).
-
-Please see [aligner.py](./bertalign/aligner.py) for more options to configure Bertalign.
-
-```python
-import os
-from bertalign import Bertalign
-from bertalign.eval import * 
-```
-
-```python
-src_dir = 'text+berg/de'
-tgt_dir = 'text+berg/fr'
-gold_dir = 'text+berg/gold'
-```
-
-```python
-test_alignments = []
-gold_alignments = []
-for file in os.listdir(src_dir):
-    src_file = os.path.join(src_dir, file).replace("\\","/")
-    tgt_file = os.path.join(tgt_dir, file).replace("\\","/")
-    src = open(src_file, 'rt', encoding='utf-8').read()
-    tgt = open(tgt_file, 'rt', encoding='utf-8').read()
-
-    print("Start aligning {} to {}".format(src_file, tgt_file))
-    aligner = Bertalign(src, tgt, is_split=True)
-    aligner.align_sents()
-    test_alignments.append(aligner.result)
-
-    gold_file = os.path.join(gold_dir, file)
-    gold_alignments.append(read_alignments(gold_file))
-```
-
-    Start aligning text+berg/de/001 to text+berg/fr/001
-    Source language: German, Number of sentences: 137
-    Target language: French, Number of sentences: 155
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 137 German sentences to 155 French sentences
-    
-    Start aligning text+berg/de/002 to text+berg/fr/002
-    Source language: German, Number of sentences: 293
-    Target language: French, Number of sentences: 274
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 293 German sentences to 274 French sentences
-    
-    Start aligning text+berg/de/003 to text+berg/fr/003
-    Source language: German, Number of sentences: 95
-    Target language: French, Number of sentences: 100
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 95 German sentences to 100 French sentences
-    
-    Start aligning text+berg/de/004 to text+berg/fr/004
-    Source language: German, Number of sentences: 107
-    Target language: French, Number of sentences: 112
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 107 German sentences to 112 French sentences
-    
-    Start aligning text+berg/de/005 to text+berg/fr/005
-    Source language: German, Number of sentences: 36
-    Target language: French, Number of sentences: 40
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 36 German sentences to 40 French sentences
-    
-    Start aligning text+berg/de/006 to text+berg/fr/006
-    Source language: German, Number of sentences: 126
-    Target language: French, Number of sentences: 131
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 126 German sentences to 131 French sentences
-    
-    Start aligning text+berg/de/007 to text+berg/fr/007
-    Source language: German, Number of sentences: 197
-    Target language: French, Number of sentences: 199
-    Embedding source and target text using LaBSE ...
-    Performing first-step alignment ...
-    Performing second-step alignment ...
-    Finished! Successfuly aligning 197 German sentences to 199 French sentences
-
-```python
-scores = score_multiple(gold_list=gold_alignments, test_list=test_alignments)
-log_final_scores(scores)
-```
-
-     ---------------------------------
-    |             |  Strict |    Lax  |
-    | Precision   |   0.932 |   0.987 |
-    | Recall      |   0.941 |   0.991 |
-    | F1          |   0.936 |   0.989 |
-     ---------------------------------
 
 ## Citation
 
