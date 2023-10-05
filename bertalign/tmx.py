@@ -31,13 +31,14 @@ class TmxFile(object):
         for i in range(len(self.src)):
             if self.src[i] == "" or self.tgt[i] == "":
                 print(
-                    "Unaligned:\nSource: "
+                    "Unaligned "
+                    + i
+                    + ":\nSource: "
                     + self.src[i]
                     + "\nTarget: "
                     + self.tgt[i]
                     + "\n"
                 )
-                continue
 
             tu = etree.SubElement(body, "tu")
             tu.set("tuid", str(i + 1))
