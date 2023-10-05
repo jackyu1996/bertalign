@@ -87,6 +87,25 @@ class Bertalign:
             tgt_line = self._get_line(bead[1], self.tgt_sents)
             print(src_line + "\n" + tgt_line + "\n")
 
+    def write_tmx(self, filename):
+        generated_src = []
+        generated_tgt = []
+
+        for bead in self.result:
+            src_line = self._get_line(bead[0], self.src_sents)
+            generated_src.append(src_line)
+
+            tgt_line = self._get_line(bead[1], self.tgt_sents)
+            generated_tgt.append(tgt_line)
+
+        tmx_file = TmxFile(
+            LANG.CODE[self.src_lang],
+            LANG.CODE[self.tgt_lang],
+            generated_src,
+            generated_tgt,
+        )
+        tmx_file.write(filename)
+
     @staticmethod
     def _get_line(bead, lines):
         line = ''
