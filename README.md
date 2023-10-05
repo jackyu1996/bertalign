@@ -24,7 +24,7 @@ Please see [requirements.txt](./requirements.txt) for installation.
 
 ## Basic example
 
-Just import *Bertalign* and initialize it with the source and target text, which will detect the source and target language automatically and split both texts into sentences. Then invoke the method *align_sents()*  to align sentences and print out the result with *print_sents()*.
+Just import *Bertalign* and initialize it with the source and target text, as well as the source and target languages. Then invoke the method *align_sents()*  to align sentences and print out the result with *print_sents()*.
 
 ```python
 from bertalign import Bertalign
@@ -51,7 +51,7 @@ She looked up. It was Bai Mulin. A slender, delicate man who wore glasses, he wa
 ```
 
 ```python
-aligner = Bertalign(src, tgt)
+aligner = Bertalign(src, tgt, "zh", "en")
 aligner.align_sents()
 ```
 
