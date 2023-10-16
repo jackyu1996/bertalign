@@ -31,13 +31,7 @@ class TmxFile(object):
         for i in range(len(self.src)):
             if self.src[i] == "" or self.tgt[i] == "":
                 print(
-                    "Unaligned "
-                    + i
-                    + ":\nSource: "
-                    + self.src[i]
-                    + "\nTarget: "
-                    + self.tgt[i]
-                    + "\n"
+                    f"Unaligned No. {str(i+1)}:\nSource: {self.src[i]}\nTarget: {self.tgt[i]}\n"
                 )
 
             tu = etree.SubElement(body, "tu")
@@ -62,4 +56,4 @@ class TmxFile(object):
             filename, pretty_print=True, xml_declaration=True, encoding="UTF-8"
         )
 
-        print("TMX file written.")
+        print("TMX file written.\n")
