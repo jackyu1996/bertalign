@@ -117,7 +117,7 @@ class Bertalign:
         )
 
         print(
-            "Finished! Successfully aligning {} {} sentences to {} {} sentences\n".format(
+            "Finished! Successfully aligning {} {} sentences to {} {} sentences".format(
                 self.src_num, self.src_lang, self.tgt_num, self.tgt_lang
             )
         )
